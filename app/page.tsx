@@ -1,38 +1,11 @@
+// app/page.tsx
 import React from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { ModeToggle } from "@/components/ModeToggle";
-
-const NAV_LINKS = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
-  { name: "Coverage", href: "/coverage" },
-  { name: "Contact", href: "/contact" },
-];
 
 export default function Home() {
   return (
     <>
-      {/* Navbar */}
-      {/* <header className="w-full bg-background text-foreground shadow px-6 py-4 flex justify-between items-center sticky top-0 z-50">
-        <Link href="/" className="text-xl font-bold text-primary">Clystra Networks</Link>
-        <nav className="flex gap-6 items-center">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium hover:text-primary"
-            >
-              {link.name}
-            </Link>
-          ))}
-          <ModeToggle />
-        </nav>
-      </header> */}
-
       {/* Main Content */}
       <main className="min-h-screen bg-background text-foreground px-6 py-10 md:px-20">
         {/* Hero Section */}
@@ -47,7 +20,7 @@ export default function Home() {
             line for your business, we've got you covered with reliable, scalable
             solutions.
           </p>
-          <div className="mt-6 flex justify-center gap-4">
+          <div className="mt-6 flex flex-wrap justify-center gap-4">
             <Button>Get Started</Button>
             <Button variant="outline">Contact Us</Button>
           </div>
@@ -72,26 +45,6 @@ export default function Home() {
           ))}
         </section>
       </main>
-
-      {/* Footer */}
-      {/* <footer className="w-full border-t border-border bg-muted px-6 py-6 text-center text-sm">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground">
-            &copy; {new Date().getFullYear()} Clystra Networks Pvt. Ltd. All rights reserved.
-          </p>
-          <div className="flex gap-4">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="hover:text-primary text-muted-foreground"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </footer> */}
     </>
   );
 }
