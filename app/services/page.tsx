@@ -1,19 +1,34 @@
-// 🛠️ Services Page (app/services/page.tsx)
+// File: app/services/page.tsx
+import React from "react";
+
 export default function ServicesPage() {
-    return (
-      <section className="grid gap-6 md:grid-cols-2">
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+  return (
+    <main className="min-h-screen bg-background text-foreground px-6 py-10 md:px-20">
+      <h1 className="text-3xl font-bold text-primary mb-6">Our Core Services</h1>
+
+      <div className="space-y-8">
+        <div>
           <h2 className="text-xl font-semibold mb-2">🔌 New Internet Connections</h2>
-          <p>Residential broadband and leased lines tailored for business-grade needs.</p>
+          <ul className="list-disc list-inside">
+            <li>Broadband for residential & commercial use</li>
+            <li>Leased lines for businesses needing dedicated bandwidth</li>
+          </ul>
         </div>
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+        <div>
           <h2 className="text-xl font-semibold mb-2">🧵 Fiber Splicing</h2>
-          <p>Precision splicing that reduces signal loss and boosts network efficiency.</p>
+          <ul className="list-disc list-inside">
+            <li>Precision fiber optic splicing for new and existing infrastructure</li>
+            <li>Reducing signal loss, improving efficiency</li>
+          </ul>
         </div>
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+        <div>
           <h2 className="text-xl font-semibold mb-2">⚡ Connectivity Restoration</h2>
-          <p>Fast response to outages with expert troubleshooting and restoration.</p>
+          <ul className="list-disc list-inside">
+            <li>Fast, expert resolution of network issues</li>
+            <li>Emergency fault repair to get you back online</li>
+          </ul>
         </div>
-      </section>
-    );
-  }
+      </div>
+    </main>
+  );
+}

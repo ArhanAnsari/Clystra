@@ -1,42 +1,22 @@
-// app/about/page.tsx
-'use client'
-
-import AnimatedSection from '@/components/AnimatedSection'
+// File: app/about/page.tsx
+import React from "react";
 
 export default function AboutPage() {
   return (
-    <main className="container py-10">
-      <AnimatedSection>
-        <h1 className="text-4xl font-bold text-primary mb-4">About Clystra Networks</h1>
-        <p className="text-lg text-muted max-w-3xl">
-          Clystra Networks Pvt. Ltd. is a pioneering internet service provider based in Nagpur, dedicated to delivering ultra-fast, reliable, and secure connectivity solutions across Maharashtra. With a focus on both broadband and leased line services, we empower businesses, institutions, and homes with cutting-edge technology and seamless internet experiences.
-        </p>
-      </AnimatedSection>
-
-      <AnimatedSection>
-        <h2 className="text-2xl font-semibold mt-10 text-secondary">Our Mission</h2>
-        <p className="text-base mt-2 text-muted max-w-2xl">
-          To revolutionize connectivity across Maharashtra by providing innovative, affordable, and high-speed internet services that support the digital growth of every sector we serve.
-        </p>
-      </AnimatedSection>
-
-      <AnimatedSection>
-        <h2 className="text-2xl font-semibold mt-10 text-secondary">Why Choose Us?</h2>
-        <ul className="list-disc ml-6 mt-2 text-muted space-y-2">
-          <li>Reliable and consistent high-speed internet</li>
-          <li>Dedicated leased line solutions for enterprises</li>
-          <li>Responsive customer support and service</li>
-          <li>Expanding coverage across urban and rural Maharashtra</li>
-          <li>Commitment to digital transformation and innovation</li>
-        </ul>
-      </AnimatedSection>
-
-      <AnimatedSection>
-        <h2 className="text-2xl font-semibold mt-10 text-secondary">Our Vision</h2>
-        <p className="text-base mt-2 text-muted max-w-2xl">
-          We envision a digitally empowered Maharashtra where everyone—from startups to students—has access to the internet as a basic right, fueling productivity, education, and progress.
-        </p>
-      </AnimatedSection>
+    <main className="min-h-screen bg-background text-foreground px-6 py-10 md:px-20">
+      <h1 className="text-3xl font-bold text-primary mb-4">About Clystra Networks Pvt. Ltd.</h1>
+      <p className="mb-4">
+        Founded on March 20, 2025, Clystra Networks is on a mission to revolutionize internet connectivity across Maharashtra. With a focus on performance, reliability, and customer-first service, we’re building the backbone of digital communication for both homes and enterprises.
+      </p>
+      <ul className="list-disc list-inside space-y-2">
+        <li>High-speed internet broadband connections</li>
+        <li>Dedicated leased line solutions</li>
+        <li>Optical fiber splicing</li>
+        <li>Rapid internet fault repair & restoration</li>
+      </ul>
+      <p className="mt-4">
+        With local expertise and a future-ready mindset, we’re redefining what internet service should look like.
+      </p>
     </main>
-  )
+  );
 }

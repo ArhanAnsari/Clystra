@@ -1,21 +1,33 @@
 // 🧭 Navbar (app/components/Navbar.tsx)
 'use client';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
 import { ModeToggle } from './ModeToggle';
+
+const NAV_LINKS = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+  { name: "Coverage", href: "/coverage" },
+  { name: "Contact", href: "/contact" },
+];
 
 export default function Navbar() {
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 shadow-md dark:shadow-lg bg-white dark:bg-gray-800">
-      <Link href="/" className="text-xl font-bold text-primary">Clystra</Link>
-      <div className="space-x-4 hidden md:flex">
-        <Link href="/" className="hover:text-primary">Home</Link>
-        <Link href="/about" className="hover:text-primary">About</Link>
-        <Link href="/services" className="hover:text-primary">Services</Link>
-        <Link href="/contact" className="hover:text-primary">Contact</Link>
-      </div>
+    <header className="w-full bg-background text-foreground shadow px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+    <nav className="flex gap-6 items-center">
+      <Link href="/" className="text-xl font-bold text-primary">Clystra Networks</Link>
+      {NAV_LINKS.map((link) => (
+        <Link
+          key={link.name}
+          href={link.href}
+          className="text-sm font-medium hover:text-primary"
+        >
+          {link.name}
+        </Link>
+      ))}
       <ModeToggle />
     </nav>
+    </header>
   );
 }
