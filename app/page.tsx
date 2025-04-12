@@ -52,6 +52,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Our Vision & Our Mission Section */}
+      <section className="text-center space-y-6 mt-12">
+      <h2 className="text-3xl font-bold text-cyan-400 mb-4">Our Vision</h2>
+        <p className="text-slate-700 dark:text-slate-300">
+          To be a leading force in shaping India’s digital future by providing robust, reliable, and accessible internet
+          infrastructure that empowers communities, fuels innovation, and bridges the digital divide.
+        </p>
+
+        <h2 className="text-3xl font-bold text-cyan-400 mb-4">Our Mission</h2>
+        <ul className="list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
+          <li>To develop and deliver high-quality internet infrastructure that meets the evolving demands of connectivity.</li>
+          <li>To support digital inclusion by reaching underserved regions with dependable broadband solutions.</li>
+          <li>To innovate continuously in technology and service delivery to ensure client satisfaction and network efficiency.</li>
+        </ul>
+      </section>
+
       {/* Services Section */}
       <section>
         <h2 className="text-3xl font-bold text-cyan-400 text-center mb-8">

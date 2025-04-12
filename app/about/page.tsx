@@ -49,7 +49,7 @@ export default function AboutPage() {
 
         <h2 className="text-2xl font-semibold text-cyan-600 dark:text-cyan-400">Our Leadership</h2>
         <p className="text-slate-700 dark:text-slate-300">
-          Clystra Networks Pvt. Ltd. is led by a visionary team of directors: Mrs. Saniya Sheikh and Mr. Danish Sheikh.
+          Clystra Networks Pvt. Ltd. is led by a visionary team of directors: <strong>Mrs. Saniya Sheikh and Mr. Danish Sheikh.</strong>
           Their combined leadership brings a strong blend of strategic foresight, operational excellence, and a deep
           commitment to driving Maharashtra’s digital transformation.
         </p>

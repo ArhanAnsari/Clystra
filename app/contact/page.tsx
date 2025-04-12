@@ -14,6 +14,7 @@ export default function ContactPage() {
           <div className="flex flex-col items-center">
             <Mail className="mb-2 text-cyan-400" />
             <p>clystranetworks@gmail.com</p>
+            <p>info@clystranetworks.com</p>
           </div>
           <div className="flex flex-col items-center">
             <Phone className="mb-2 text-cyan-400" />
