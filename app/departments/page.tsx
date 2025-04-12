@@ -22,6 +22,13 @@ export default function DepartmentsPage() {
             With a proven track record of leadership and a deep understanding of business dynamics, He is committed to aligning HR initiatives with corporate goals and building a work environment that attracts, retains, and nurtures top talent.
           </p>
         </section>
+        {/* Section for contact us in HR Department */}
+        <section className="text-center space-y-4 mt-8">
+          <h2 className="text-2xl font-semibold text-primary"><strong>Contact Us</strong></h2>
+          <p className="text-slate-300">For inquiries, please reach out to us at:</p>
+          <p className="text-slate-300"><strong>Email:</strong> hr@clystra.com</p>
+          <p className="text-slate-300"><strong>Phone:</strong> +91 9823083123</p>
+        </section>  
       </section>
     </main>
   );

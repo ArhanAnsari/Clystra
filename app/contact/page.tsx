@@ -13,11 +13,11 @@ export default function ContactPage() {
         <div className="grid gap-6 md:grid-cols-3 py-8">
           <div className="flex flex-col items-center">
             <Mail className="mb-2 text-cyan-400" />
-            <p>support@clystra.in</p>
+            <p>clystranetworks@gmail.com</p>
           </div>
           <div className="flex flex-col items-center">
             <Phone className="mb-2 text-cyan-400" />
-            <p>+91 98765 43210</p>
+            <p>+91 7720033786</p>
           </div>
           <div className="flex flex-col items-center">
             <MapPin className="mb-2 text-cyan-400" />
