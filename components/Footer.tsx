@@ -1,22 +1,20 @@
 // 🦶 Footer (app/components/Footer.tsx)
-'use client';
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
-  { name: "Coverage", href: "/coverage" },
-  { name: "Contact", href: "/contact" },
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Services', href: '/services' },
+  { name: 'Coverage', href: '/coverage' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 export default function Footer() {
   const pathname = usePathname();
 
   return (
-    <footer className="w-full border-t border-border bg-muted px-6 py-6 text-center text-sm">
+    <footer className="w-full border-t border-border bg-muted px-6 py-6 text-center text-sm mt-auto">
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-muted-foreground">
           &copy; {new Date().getFullYear()} Clystra Networks Pvt. Ltd. All rights reserved.
