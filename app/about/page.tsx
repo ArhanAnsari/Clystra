@@ -7,6 +7,10 @@ export default function AboutPage() {
         <h1 className="text-4xl font-bold text-cyan-600 dark:text-cyan-400">About Clystra Networks Pvt. Ltd.</h1>
 
         <p className="text-slate-700 dark:text-slate-300">
+          CLYSTRA NETWORKS PVT. LTD. (CIN: U61101MH2025PTC443366) is a Private Company incorporated on 20th March 2025. It is classified as a Non-Govt Company and is registered at Registrar of Companies, Mumbai. The authorized share capital of Clystra Networks Pvt. Ltd. is ₹ 10,00,000 and its paid-up capital is ₹ 10,00,000.
+        </p>
+
+        <p className="text-slate-700 dark:text-slate-300">
           Clystra Networks Pvt. Ltd. is a next-generation Internet Infrastructure Providing Company, headquartered in
           Nagpur, Maharashtra. With a strategic focus on empowering digital growth across the region, Clystra Networks is
           dedicated to designing, deploying, and maintaining high-performance internet infrastructure that enables
