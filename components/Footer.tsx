@@ -1,8 +1,7 @@
-// 🦶 Footer (app/components/Footer.tsx)
 'use client';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 const NAV_LINKS = [
   { name: 'Home', href: '/' },
@@ -17,7 +16,12 @@ export default function Footer() {
   const pathname = usePathname();
 
   return (
-    <footer className="w-full border-t border-border bg-muted px-6 py-6 text-center text-sm mt-auto">
+    <motion.footer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="w-full border-t border-border bg-muted px-6 py-6 text-center text-sm mt-auto"
+    >
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-muted-foreground">
           &copy; {new Date().getFullYear()} Clystra Networks Pvt. Ltd. All rights reserved.
@@ -36,6 +40,6 @@ export default function Footer() {
           ))}
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

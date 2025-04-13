@@ -1,16 +1,17 @@
-// 🧭 Navbar (app/components/Navbar.tsx)
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ModeToggle } from './ModeToggle';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ModeToggle } from './ModeToggle';
+import Image from 'next/image';
 
 const NAV_LINKS = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Services', href: '/services' },
-  { name: 'Departments', href: '/departments'},
+  { name: 'Departments', href: '/departments' },
   { name: 'Coverage', href: '/coverage' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -20,11 +21,17 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full bg-background text-foreground shadow px-6 py-4 sticky top-0 z-50">
+    <motion.header
+      initial={{ y: -30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="w-full bg-background text-foreground shadow px-6 py-4 sticky top-0 z-50"
+    >
       <nav className="flex justify-between items-center">
-        <div className="text-xl font-bold text-primary whitespace-nowrap">
-          <Link href="/">Clystra Networks</Link>
-        </div>
+        <Link href="/" className="flex items-center space-x-2 text-xl font-bold text-primary">
+          {/* <Image src="/logo.svg" alt="Clystra Logo" width={30} height={30} /> */}
+          <span>Clystra Networks</span>
+        </Link>
 
         <div className="hidden md:flex space-x-6 items-center">
           {NAV_LINKS.map((link) => (
@@ -50,7 +57,11 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden mt-4 space-y-2">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="md:hidden mt-4 space-y-2"
+        >
           {NAV_LINKS.map((link) => (
             <Link
               key={link.name}
@@ -66,8 +77,8 @@ export default function Navbar() {
           <div className="px-4">
             <ModeToggle />
           </div>
-        </div>
+        </motion.div>
       )}
-    </header>
+    </motion.header>
   );
 }
