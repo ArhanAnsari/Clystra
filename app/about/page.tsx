@@ -1,84 +1,225 @@
-import React from "react";
+'use client';
 
-export default function AboutPage() {
+import { motion } from 'framer-motion';
+import { Users, Award, Clock, Globe2, Network, Cpu } from 'lucide-react';
+import PageTransition from '../../components/PageTransition';
+import Image from 'next/image';
+
+export default function About() {
+  const stats = [
+    { icon: <Users />, value: '100+', label: 'Clients Served' },
+    { icon: <Award />, value: '1+', label: 'Years Experience' },
+    { icon: <Clock />, value: '24/7', label: 'Support Available' },
+    { icon: <Globe2 />, value: '10+', label: 'Cities Covered' },
+  ];
+
+  const team = [
+    {
+      name: 'Mrs. Saniya Sheikh',
+      position: 'Director',
+      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400',
+    },
+    {
+      name: 'Mr. Danish Sheikh',
+      position: 'Director',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400',
+    }
+  ];
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white via-slate-100 to-white dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#0f172a]" >
-      <section className="space-y-6 max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-cyan-600 dark:text-cyan-400">About Clystra Networks Pvt. Ltd.</h1>
+    <PageTransition>
+        <main className="min-h-screen pt-[100px]"> {/* Adjust this based on your navbar height */}
+        {/* Hero Section */}
+        <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20">
+          <div className="container mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-3xl mx-auto text-center"
+            >
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">About Clystra Networks</h1>
+              <p className="text-xl text-blue-100">
+                Shaping India's digital future through robust internet infrastructure
+              </p>
+            </motion.div>
+          </div>
+        </section>
 
-        <p className="text-slate-700 dark:text-slate-300">
-          CLYSTRA NETWORKS PVT. LTD. (CIN: U61101MH2025PTC443366) is a Private Company incorporated on 20th March 2025. It is classified as a Non-Govt Company and is registered at Registrar of Companies, Mumbai. The authorized share capital of Clystra Networks Pvt. Ltd. is ₹ 10,00,000 and its paid-up capital is ₹ 10,00,000.
-        </p>
+        {/* Company Info Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-6">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-3xl font-bold mb-6">Our Story</h2>
+                <p className="text-gray-600 mb-6">
+                  Founded in March 2025, Clystra Networks Pvt. Ltd. (CIN: U61101MH2025PTC443366) is a next-generation 
+                  Internet Infrastructure Providing Company, headquartered in Nagpur, Maharashtra. We specialize in 
+                  designing, deploying, and maintaining high-performance internet infrastructure that enables seamless 
+                  connectivity for individuals, businesses, and institutions.
+                </p>
+                <p className="text-gray-600">
+                  Our head office is located at Flat No. 105, Saraswati Apartment 3, Wanjari Nagar, Medical College, 
+                  Nagpur, from where we manage our growing network of operations across Maharashtra.
+                </p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="relative h-[400px]"
+              >
+                <Image
+                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800"
+                  alt="Clystra Networks Office"
+                  fill
+                  className="object-cover rounded-lg shadow-xl"
+                />
+              </motion.div>
+            </div>
+          </div>
+        </section>
 
-        <p className="text-slate-700 dark:text-slate-300">
-          Clystra Networks Pvt. Ltd. is a next-generation Internet Infrastructure Providing Company, headquartered in
-          Nagpur, Maharashtra. With a strategic focus on empowering digital growth across the region, Clystra Networks is
-          dedicated to designing, deploying, and maintaining high-performance internet infrastructure that enables
-          seamless connectivity for individuals, businesses, and institutions.
-        </p>
+        {/* Vision & Mission */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-6">
+            <div className="grid md:grid-cols-2 gap-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-white p-8 rounded-lg shadow-lg"
+              >
+                <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
+                <p className="text-gray-600">
+                  To be a leading force in shaping India's digital future by providing robust, reliable, and 
+                  accessible internet infrastructure that empowers communities, fuels innovation, and bridges 
+                  the digital divide.
+                </p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-white p-8 rounded-lg shadow-lg"
+              >
+                <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
+                <ul className="text-gray-600 space-y-2">
+                  <li>• Develop and deliver high-quality internet infrastructure</li>
+                  <li>• Support digital inclusion in underserved regions</li>
+                  <li>• Innovate continuously in technology and service delivery</li>
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+        </section>
 
-        <p className="text-slate-700 dark:text-slate-300">
-          Our head office is located at Flat No. 105, Saraswati Apartment 3, Wanjari Nagar, Medical College, Nagpur, and
-          from here, we manage a growing network of operations that span across key cities and towns in Maharashtra. At
-          the core of our mission is a belief that reliable internet access is no longer a luxury—it is a basic necessity
-          in today’s digital-first world.
-        </p>
+        {/* Stats Section */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="flex justify-center mb-4 text-blue-600">
+                    {stat.icon}
+                  </div>
+                  <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
+                  <div className="text-gray-600">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <h2 className="text-2xl font-semibold text-cyan-600 dark:text-cyan-400">Our Vision</h2>
-        <p className="text-slate-700 dark:text-slate-300">
-          To be a leading force in shaping India’s digital future by providing robust, reliable, and accessible internet
-          infrastructure that empowers communities, fuels innovation, and bridges the digital divide.
-        </p>
+        {/* Leadership Team */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl font-bold text-center mb-16"
+            >
+              Our Leadership Team
+            </motion.h2>
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {team.map((member, index) => (
+                <motion.div
+                  key={member.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  className="text-center"
+                >
+                  <div className="relative w-48 h-48 mx-auto mb-6">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover rounded-full"
+                    />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
+                  <p className="text-gray-600">{member.position}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <h2 className="text-2xl font-semibold text-cyan-600 dark:text-cyan-400">Our Mission</h2>
-        <ul className="list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
-          <li>To develop and deliver high-quality internet infrastructure that meets the evolving demands of connectivity.</li>
-          <li>To support digital inclusion by reaching underserved regions with dependable broadband solutions.</li>
-          <li>To innovate continuously in technology and service delivery to ensure client satisfaction and network efficiency.</li>
-        </ul>
-
-        <h2 className="text-2xl font-semibold text-cyan-600 dark:text-cyan-400">What We Do</h2>
-        <ul className="list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
-          <li>High-speed broadband infrastructure development</li>
-          <li>Fiber optic and wireless network deployment</li>
-          <li>Customized internet solutions for residential, commercial, and institutional clients</li>
-          <li>Scalable infrastructure for ISPs, data centers, and enterprise networks</li>
-          <li>Ongoing maintenance, optimization, and support services</li>
-        </ul>
-
-        <p className="text-slate-700 dark:text-slate-300">
-          We leverage industry best practices, cutting-edge technology, and a customer-first approach to ensure that every
-          solution we provide is reliable, scalable, and future-ready.
-        </p>
-
-        <h2 className="text-2xl font-semibold text-cyan-600 dark:text-cyan-400">Our Leadership</h2>
-        <p className="text-slate-700 dark:text-slate-300">
-          Clystra Networks Pvt. Ltd. is led by a visionary team of directors: <strong>Mrs. Saniya Sheikh and Mr. Danish Sheikh.</strong>
-          Their combined leadership brings a strong blend of strategic foresight, operational excellence, and a deep
-          commitment to driving Maharashtra’s digital transformation.
-        </p>
-
-        <p className="text-slate-700 dark:text-slate-300">
-          Under their guidance, Clystra Networks is not just another connectivity provider—we are a technology enabler
-          that is setting new benchmarks in internet infrastructure services.
-        </p>
-
-        <h2 className="text-2xl font-semibold text-cyan-600 dark:text-cyan-400">Why Choose Us?</h2>
-        <ul className="list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
-          <li>Local Expertise with a Statewide Vision: Rooted in Nagpur, we understand the unique challenges and opportunities across Maharashtra.</li>
-          <li>Innovation-Driven: We adopt the latest technologies to future-proof our networks.</li>
-          <li>Reliability First: Our infrastructure is built to perform—day in, day out.</li>
-          <li>Customer-Centric Approach: We listen, we solve, and we deliver.</li>
-          <li>Scalable Solutions: From a single home to an entire enterprise, our infrastructure grows with your needs.</li>
-        </ul>
-
-        <h2 className="text-2xl font-semibold text-cyan-600 dark:text-cyan-400">Our Commitment</h2>
-        <p className="text-slate-700 dark:text-slate-300">
-          At Clystra Networks, we are committed to being more than just a service provider—we aim to be a partner in
-          progress. Whether it’s enabling online education in remote villages, supporting businesses with high-speed data,
-          or laying the groundwork for smart city projects, our goal is to make digital empowerment a reality for all.
-        </p>
-      </section>
-    </main>
+        {/* Services Overview */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl font-bold text-center mb-16"
+            >
+              What We Do
+            </motion.h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                "High-speed broadband infrastructure development",
+                "Fiber optic and wireless network deployment",
+                "Customized internet solutions",
+                "Scalable infrastructure for ISPs",
+                "Data center solutions",
+                "Enterprise networks"
+              ].map((service, index) => (
+                <motion.div
+                  key={service}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-white p-6 rounded-lg shadow-lg"
+                >
+                  <p className="text-gray-600">{service}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+    </PageTransition>
   );
 }

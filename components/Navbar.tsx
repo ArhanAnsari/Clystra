@@ -1,84 +1,109 @@
 'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ModeToggle } from './ModeToggle';
-import Image from 'next/image';
+import { Network, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const NAV_LINKS = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Services', href: '/services' },
-  { name: 'Departments', href: '/departments' },
-  { name: 'Coverage', href: '/coverage' },
-  { name: 'Contact', href: '/contact' },
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/departments', label: 'Departments' },
+  { href: '/coverage', label: 'Coverage' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <motion.header
-      initial={{ y: -30, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="w-full bg-background text-foreground shadow px-6 py-4 sticky top-0 z-50"
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.4 }}
+      className={`fixed w-full z-50 transition-colors duration-300 ${
+        isScrolled
+          ? 'bg-background/80 backdrop-blur border-b border-border shadow-sm'
+          : 'bg-transparent'
+      }`}
     >
-      <nav className="flex justify-between items-center">
-        <Link href="/" className="flex items-center space-x-2 text-xl font-bold text-primary">
-          {/* <Image src="/logo.svg" alt="Clystra Logo" width={30} height={30} /> */}
-          <span>Clystra Networks</span>
-        </Link>
+      <div className="container mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2">
+            <Network className="h-8 w-8 text-primary" />
+            <span className="text-xl font-bold text-primary">Clystra Networks</span>
+          </Link>
 
-        <div className="hidden md:flex space-x-6 items-center">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className={`text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
-                pathname === link.href ? 'text-primary underline' : 'hover:text-primary'
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <ModeToggle />
-        </div>
+          {/* Desktop Nav */}
+          <div className="hidden lg:flex items-center space-x-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative text-sm font-medium transition-colors ${
+                  pathname === link.href
+                    ? 'text-primary underline underline-offset-4'
+                    : 'text-muted-foreground hover:text-primary'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
 
-        <div className="md:hidden flex items-center">
-          <button onClick={() => setIsOpen(!isOpen)} className="text-primary">
-            {isOpen ? <X /> : <Menu />}
+          {/* Mobile Button */}
+          <button
+            className="lg:hidden text-primary"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-      </nav>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="md:hidden mt-4 space-y-2"
-        >
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className={`block px-4 py-2 text-sm font-medium rounded transition-colors duration-200 ${
-                pathname === link.href ? 'text-primary underline' : 'hover:text-primary'
-              }`}
+        {/* Mobile Nav */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden mt-4"
             >
-              {link.name}
-            </Link>
-          ))}
-          <div className="px-4">
-            <ModeToggle />
-          </div>
-        </motion.div>
-      )}
-    </motion.header>
+              <div className="flex flex-col space-y-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`text-sm font-medium transition-colors ${
+                      pathname === link.href
+                        ? 'text-primary underline underline-offset-4'
+                        : 'text-muted-foreground hover:text-primary'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.nav>
   );
 }
