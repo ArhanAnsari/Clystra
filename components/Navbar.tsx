@@ -52,11 +52,11 @@ export default function Navbar() {
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-16 relative">
+          <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link 
               href="/" 
-              className="flex items-center space-x-3 sm:space-x-4 min-h-[44px] relative z-50 flex-shrink-0"
+              className="flex items-center space-x-3"
               aria-label="Clystra Networks Home"
             >
               <Network className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
@@ -66,49 +66,43 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 space-x-1">
+            <div className="hidden md:flex items-center space-x-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-accent ${
+                  className={`text-sm font-medium transition-colors ${
                     pathname === link.href
-                      ? 'text-primary bg-primary/10'
+                      ? 'text-primary'
                       : 'text-foreground hover:text-primary'
                   }`}
                   aria-current={pathname === link.href ? 'page' : undefined}
                 >
                   {link.label}
-                  {pathname === link.href && (
-                    <motion.div
-                      layoutId="activeNavItem"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
-                    />
-                  )}
                 </Link>
               ))}
             </div>
 
             {/* Right Side Actions */}
-            <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
+            <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="text-muted-foreground hover:text-primary w-8 h-8 sm:w-10 sm:h-10"
+                className="text-muted-foreground hover:text-primary"
                 aria-label="Search"
               >
-                <Search className="h-4 w-4 sm:h-5 sm:w-5" />
+                <Search className="h-5 w-5" />
               </Button>
 
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsChatOpen(!isChatOpen)}
-                className="text-muted-foreground hover:text-primary w-8 h-8 sm:w-10 sm:h-10"
+                className="text-muted-foreground hover:text-primary"
                 aria-label="Chat Support"
               >
-                <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                <MessageCircle className="h-5 w-5" />
               </Button>
 
               <ModeToggle />
@@ -116,12 +110,12 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="lg:hidden text-muted-foreground hover:text-primary w-8 h-8 sm:w-10 sm:h-10"
+                className="md:hidden text-muted-foreground hover:text-primary"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isMobileMenuOpen}
               >
-                {isMobileMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
+                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </div>
           </div>
@@ -135,7 +129,7 @@ export default function Navbar() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="lg:hidden border-t border-border bg-background/95 backdrop-blur-md"
+              className="md:hidden border-t border-border bg-background/95 backdrop-blur-md"
             >
               <div className="container mx-auto px-4 py-4">
                 <div className="grid gap-2">
@@ -143,7 +137,7 @@ export default function Navbar() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className={`flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors ${
+                      className={`px-4 py-3 text-sm font-medium rounded-md transition-colors ${
                         pathname === link.href
                           ? 'bg-primary/10 text-primary'
                           : 'text-foreground hover:bg-accent hover:text-primary'
@@ -177,7 +171,7 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Search Panel - Added close button */}
+      {/* Search Panel */}
       <AnimatePresence>
         {isSearchOpen && (
           <motion.div
@@ -196,12 +190,12 @@ export default function Navbar() {
                     className="w-full px-4 py-2 pl-10 pr-10 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-primary"
                     aria-label="Search input"
                   />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => setIsSearchOpen(false)}
-                    className="absolute right-1 top-1/2 transform -translate-y-1/2"
+                    className="absolute right-1 top-1/2 -translate-y-1/2"
                     aria-label="Close search"
                   >
                     <X className="h-4 w-4" />
@@ -213,7 +207,7 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Chat Panel - Added close button */}
+      {/* Chat Panel */}
       <AnimatePresence>
         {isChatOpen && (
           <motion.div
