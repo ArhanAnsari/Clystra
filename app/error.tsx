@@ -1,41 +1,48 @@
 // app/error.tsx
 "use client";
 
-import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { AlertTriangleIcon } from "lucide-react";
+import Link from 'next/link';
+import { AlertTriangle, Home, RefreshCw } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-export default function GlobalError({ error, reset }: Readonly<{ error: Error; reset: () => void }>) {
-  useEffect(() => {
-    console.error("Global Error:", error);
-  }, [error]);
-
+export default function GlobalError({
+  error,
+  reset,
+}: Readonly<{
+  error: Error & { digest?: string };
+  reset: () => void;
+}>) {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-slate-100 to-white dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#0f172a] text-gray-800 dark:text-white px-4 relative overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="flex flex-col items-center z-10"
-      >
-        <AlertTriangleIcon className="w-16 h-16 text-red-500 mb-2 animate-bounce" />
-        <h1 className="text-5xl font-bold text-cyan-600 dark:text-cyan-400 mb-4">Something went wrong</h1>
-        <p className="text-lg text-slate-700 dark:text-slate-300 mb-6">An unexpected error has occurred. Please try again.</p>
-        <button
-          onClick={reset}
-          className="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-xl transition-all"
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted">
+      <div className="text-center px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="space-y-6"
         >
-          Try Again
-        </button>
-      </motion.div>
-
-      {/* Background Illustration */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 1 }}
-        className="absolute w-[400px] h-[400px] bg-red-200 dark:bg-red-800 rounded-full blur-3xl -z-10 top-20 right-10"
-      />
-    </main>
+          <div className="flex justify-center">
+            <AlertTriangle className="h-16 w-16 text-destructive" />
+          </div>
+          <h1 className="text-4xl font-bold">Something went wrong!</h1>
+          <p className="text-muted-foreground max-w-md mx-auto">
+            {error.message || 'An unexpected error occurred. Please try again.'}
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Button onClick={reset} className="flex items-center gap-2">
+              <RefreshCw className="h-4 w-4" />
+              Try Again
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/" className="flex items-center gap-2">
+                <Home className="h-4 w-4" />
+                Back to Home
+              </Link>
+            </Button>
+          </div>
+        </motion.div>
+      </div>
+    </div>
   );
 }
