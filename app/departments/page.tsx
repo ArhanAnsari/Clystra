@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Users } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 export default function Departments() {
   const departments = [
@@ -88,14 +88,14 @@ export default function Departments() {
               </p>
             </motion.div>
 
-            <div className="relative h-[400px] mb-12">
+            {/* <div className="relative h-[400px] mb-12">
               <Image
                 src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200"
                 alt="Team Collaboration"
                 fill
                 className="object-cover rounded-lg shadow-xl"
               />
-            </div>
+            </div> */}
 
             <div className="grid md:grid-cols-3 gap-8 text-center">
               <motion.div
