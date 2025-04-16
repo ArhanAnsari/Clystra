@@ -53,7 +53,11 @@ export default function Navbar() {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2">
+            <Link 
+              href="/" 
+              className="flex items-center space-x-2 min-h-[44px] min-w-[44px]"
+              aria-label="Clystra Networks Home"
+            >
               <Network className="h-8 w-8 text-primary" />
                 Clystra Networks
             </Link>
@@ -64,11 +68,12 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative text-sm font-medium transition-colors ${
+                  className={`relative text-sm font-medium transition-colors min-h-[44px] min-w-[44px] flex items-center ${
                     pathname === link.href
                       ? 'text-primary'
                       : 'text-muted-foreground hover:text-primary'
                   }`}
+                  aria-current={pathname === link.href ? 'page' : undefined}
                 >
                   {link.label}
                   {pathname === link.href && (
@@ -85,18 +90,20 @@ export default function Navbar() {
             <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
-                size="icon"
+                size="lg"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="text-muted-foreground hover:text-primary"
+                className="text-muted-foreground hover:text-primary min-h-[44px] min-w-[44px]"
+                aria-label="Search"
               >
                 <Search className="h-5 w-5" />
               </Button>
 
               <Button
                 variant="ghost"
-                size="icon"
+                size="lg"
                 onClick={() => setIsChatOpen(!isChatOpen)}
-                className="text-muted-foreground hover:text-primary"
+                className="text-muted-foreground hover:text-primary min-h-[44px] min-w-[44px]"
+                aria-label="Chat Support"
               >
                 <MessageCircle className="h-5 w-5" />
               </Button>
@@ -105,9 +112,11 @@ export default function Navbar() {
 
               <Button
                 variant="ghost"
-                size="icon"
-                className="lg:hidden text-muted-foreground hover:text-primary"
+                size="lg"
+                className="lg:hidden text-muted-foreground hover:text-primary min-h-[44px] min-w-[44px]"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={isMobileMenuOpen}
               >
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
@@ -125,6 +134,8 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
             className="fixed top-16 left-0 right-0 z-40 lg:hidden bg-background border-b border-border shadow-lg"
+            role="navigation"
+            aria-label="Mobile menu"
           >
             <div className="container mx-auto px-4 py-2">
               <div className="space-y-1">
@@ -132,11 +143,12 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`block px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                    className={`block px-4 py-3 text-sm font-medium rounded-lg transition-colors min-h-[44px] ${
                       pathname === link.href
                         ? 'bg-primary/10 text-primary'
                         : 'text-muted-foreground hover:bg-primary/5 hover:text-primary'
                     }`}
+                    aria-current={pathname === link.href ? 'page' : undefined}
                   >
                     {link.label}
                   </Link>
@@ -155,13 +167,15 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             className="fixed top-16 left-0 right-0 z-40 bg-background border-b border-border shadow-lg"
+            role="search"
           >
             <div className="container mx-auto px-4 py-4">
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full px-4 py-2 pl-10 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 pl-10 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px]"
+                  aria-label="Search input"
                 />
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               </div>
@@ -178,6 +192,8 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             className="fixed top-16 right-0 w-80 z-40 bg-background border border-border rounded-lg shadow-lg p-4"
+            role="dialog"
+            aria-label="Chat support"
           >
             <div className="space-y-4">
               <h3 className="font-semibold">Chat Support</h3>
@@ -188,9 +204,12 @@ export default function Navbar() {
                 <input
                   type="text"
                   placeholder="Type your message..."
-                  className="flex-1 px-3 py-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="flex-1 px-3 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px]"
+                  aria-label="Chat message input"
                 />
-                <Button size="sm">Send</Button>
+                <Button size="lg" className="min-h-[44px] min-w-[44px]">
+                  Send
+                </Button>
               </div>
             </div>
           </motion.div>
