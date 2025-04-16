@@ -80,6 +80,9 @@ export default function About() {
                   alt="Clystra Networks Office"
                   fill
                   className="object-cover rounded-lg shadow-xl"
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j..." // Add base64 blur image
+                  loading="lazy"
                 />
               </motion.div>
             </div>
