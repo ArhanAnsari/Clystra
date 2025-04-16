@@ -2,7 +2,6 @@
 
 import { Network, Mail, Phone, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
-import ModeToggle from './ModeToggle';
 import NewsletterForm from './NewsLetterForm';
 
 const footerVariants = {
@@ -84,7 +83,6 @@ export default function Footer() {
             <p className="text-blue-100">Subscribe to our newsletter for updates</p>
             <NewsletterForm />
           </div>
-            <ModeToggle />
           </motion.div>
         </div>
 
