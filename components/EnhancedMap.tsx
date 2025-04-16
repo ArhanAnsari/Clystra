@@ -6,8 +6,6 @@ import dynamic from 'next/dynamic';
 // Import Leaflet CSS in a way that works with SSR
 import 'leaflet/dist/leaflet.css';
 
-// Dynamically import Leaflet and its components
-const L = dynamic(() => import('leaflet'), { ssr: false });
 const MapContainer = dynamic(
   () => import('react-leaflet').then((mod) => mod.MapContainer),
   { ssr: false }
@@ -50,7 +48,7 @@ export default function EnhancedMap({ coverageAreas }: Readonly<EnhancedMapProps
     // Fix for default marker icons
     if (typeof window !== 'undefined') {
       const L = require('leaflet');
-      delete (L.Icon.Default.prototype as any)._getIconUrl;
+      delete L.Icon.Default.prototype._getIconUrl;
       L.Icon.Default.mergeOptions({
         iconRetinaUrl: '/marker-icon-2x.png',
         iconUrl: '/marker-icon.png',

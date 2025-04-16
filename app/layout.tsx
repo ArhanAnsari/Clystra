@@ -8,8 +8,6 @@ import { Toaster } from '@/components/ui/sonner';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import ChatWidget from '@/components/ChatWidget';
-import Search from '@/components/Search';
 import { GA_TRACKING_ID } from '@/lib/analytics';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -56,14 +54,12 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="flex flex-col min-h-screen">
             <Navbar />
-            <Search />
             <main className="flex-grow pt-20 pb-10">
               <div className="container mx-auto px-4 md:px-6">
                 {children}
               </div>
             </main>
             <Footer />
-            <ChatWidget />
           </div>
           <Toaster />
         </ThemeProvider>
