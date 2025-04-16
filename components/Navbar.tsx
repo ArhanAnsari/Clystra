@@ -40,14 +40,15 @@ export default function Navbar() {
 
   return (
     <>
+      <div className="h-16" />
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.4 }}
-        className={`fixed w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-background/80 backdrop-blur-md border-b border-border shadow-sm'
-            : 'bg-transparent'
+            ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-sm'
+            : 'bg-background/50 backdrop-blur-sm'
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6">
@@ -55,23 +56,25 @@ export default function Navbar() {
             {/* Logo */}
             <Link 
               href="/" 
-              className="flex items-center space-x-2 min-h-[44px] min-w-[44px]"
+              className="flex items-center space-x-3 min-h-[44px] relative z-50"
               aria-label="Clystra Networks Home"
             >
               <Network className="h-8 w-8 text-primary" />
+              <span className="text-xl font-bold text-primary">
                 Clystra Networks
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative text-sm font-medium transition-colors min-h-[44px] min-w-[44px] flex items-center ${
+                  className={`relative px-4 py-2 text-sm font-medium rounded-md transition-colors hover:bg-accent ${
                     pathname === link.href
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary'
                   }`}
                   aria-current={pathname === link.href ? 'page' : undefined}
                 >
@@ -87,12 +90,12 @@ export default function Navbar() {
             </div>
 
             {/* Right Side Actions */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
               <Button
                 variant="ghost"
-                size="lg"
+                size="sm"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="text-muted-foreground hover:text-primary min-h-[44px] min-w-[44px]"
+                className="text-muted-foreground hover:text-primary"
                 aria-label="Search"
               >
                 <Search className="h-5 w-5" />
@@ -100,9 +103,9 @@ export default function Navbar() {
 
               <Button
                 variant="ghost"
-                size="lg"
+                size="sm"
                 onClick={() => setIsChatOpen(!isChatOpen)}
-                className="text-muted-foreground hover:text-primary min-h-[44px] min-w-[44px]"
+                className="text-muted-foreground hover:text-primary"
                 aria-label="Chat Support"
               >
                 <MessageCircle className="h-5 w-5" />
@@ -112,8 +115,8 @@ export default function Navbar() {
 
               <Button
                 variant="ghost"
-                size="lg"
-                className="lg:hidden text-muted-foreground hover:text-primary min-h-[44px] min-w-[44px]"
+                size="sm"
+                className="md:hidden text-muted-foreground hover:text-primary ml-2"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isMobileMenuOpen}
@@ -123,39 +126,54 @@ export default function Navbar() {
             </div>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden border-t border-border bg-background/95 backdrop-blur-md"
+            >
+              <div className="container mx-auto px-4 py-4">
+                <div className="grid gap-2">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors ${
+                        pathname === link.href
+                          ? 'bg-primary/10 text-primary'
+                          : 'text-foreground hover:bg-accent hover:text-primary'
+                      }`}
+                      aria-current={pathname === link.href ? 'page' : undefined}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Overlays */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {(isSearchOpen || isChatOpen) && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed top-16 left-0 right-0 z-40 lg:hidden bg-background border-b border-border shadow-lg"
-            role="navigation"
-            aria-label="Mobile menu"
-          >
-            <div className="container mx-auto px-4 py-2">
-              <div className="space-y-1">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`block px-4 py-3 text-sm font-medium rounded-lg transition-colors min-h-[44px] ${
-                      pathname === link.href
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:bg-primary/5 hover:text-primary'
-                    }`}
-                    aria-current={pathname === link.href ? 'page' : undefined}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-30"
+            aria-hidden="true"
+            onClick={() => {
+              setIsSearchOpen(false);
+              setIsChatOpen(false);
+            }}
+          />
         )}
       </AnimatePresence>
 
@@ -170,11 +188,11 @@ export default function Navbar() {
             role="search"
           >
             <div className="container mx-auto px-4 py-4">
-              <div className="relative">
+              <div className="relative max-w-2xl mx-auto">
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full px-4 py-3 pl-10 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px]"
+                  className="w-full px-4 py-2 pl-10 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-primary"
                   aria-label="Search input"
                 />
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -191,23 +209,25 @@ export default function Navbar() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="fixed top-16 right-0 w-80 z-40 bg-background border border-border rounded-lg shadow-lg p-4"
+            className="fixed top-16 right-4 w-80 z-40 bg-background border border-border rounded-lg shadow-lg"
             role="dialog"
             aria-label="Chat support"
           >
-            <div className="space-y-4">
+            <div className="p-4 border-b border-border">
               <h3 className="font-semibold">Chat Support</h3>
-              <div className="h-60 overflow-y-auto">
-                {/* Chat messages will go here */}
-              </div>
-              <div className="flex space-x-2">
+            </div>
+            <div className="p-4 h-[400px] overflow-y-auto">
+              {/* Chat messages will go here */}
+            </div>
+            <div className="p-4 border-t border-border">
+              <div className="flex gap-2">
                 <input
                   type="text"
                   placeholder="Type your message..."
-                  className="flex-1 px-3 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px]"
+                  className="flex-1 px-3 py-2 text-sm rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-primary"
                   aria-label="Chat message input"
                 />
-                <Button size="lg" className="min-h-[44px] min-w-[44px]">
+                <Button size="sm" variant="default">
                   Send
                 </Button>
               </div>
@@ -215,9 +235,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Spacer to prevent content from being hidden under navbar */}
-      <div className="h-16" />
     </>
   );
 }
