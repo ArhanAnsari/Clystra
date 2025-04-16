@@ -55,6 +55,7 @@ export default function Footer() {
               <li><a href="/services" className="hover:text-blue-300 transition">Services</a></li>
               <li><a href="/departments" className="hover:text-blue-300 transition">Departments</a></li>
               <li><a href="/coverage" className="hover:text-blue-300 transition">Coverage</a></li>
+              <li><a href="/contact" className="hover:text-blue-300 transition">Contact</a></li>
             </ul>
           </motion.div>
 
@@ -64,6 +65,10 @@ export default function Footer() {
               <div className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-blue-300" />
                 <span>Flat No. 105, Saraswati Apartment 3,<br />Wanjari Nagar, Medical College,<br />Nagpur</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="h-5 w-5 text-blue-300" />
+                <span>+91 7720033786</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-blue-300" />

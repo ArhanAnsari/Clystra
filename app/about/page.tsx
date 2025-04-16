@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Users, Award, Clock, Globe2, Network, Cpu } from 'lucide-react';
+import { Users, Award, Clock, Globe2 } from 'lucide-react';
 import PageTransition from '../../components/PageTransition';
 import Image from 'next/image';
 

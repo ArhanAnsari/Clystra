@@ -24,6 +24,13 @@ export default function Contact() {
       ]
     },
     {
+      icon: <Phone className="h-6 w-6 text-blue-600" />,
+      title: 'Phone',
+      details: [
+        '+91 7720033786'
+      ]
+    },
+    {
       icon: <Clock className="h-6 w-6 text-blue-600" />,
       title: 'Working Hours',
       details: [
@@ -178,6 +185,8 @@ export default function Contact() {
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Clystra Networks Office Location"
               ></iframe>
             </div>
           </div>

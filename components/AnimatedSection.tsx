@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 
-export default function AnimatedSection({ children }: { children: ReactNode }) {
+export default function AnimatedSection({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

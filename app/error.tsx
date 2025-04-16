@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { AlertTriangleIcon } from "lucide-react";
 
-export default function GlobalError({ error, reset }: { error: Error; reset: () => void }) {
+export default function GlobalError({ error, reset }: Readonly<{ error: Error; reset: () => void }>) {
   useEffect(() => {
     console.error("Global Error:", error);
   }, [error]);

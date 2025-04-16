@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { Shield, Cloud, Cpu, Server, Network, Globe2, Lock, Settings, Wifi } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
-import Image from 'next/image';
 
 export default function Services() {
   const services = [
