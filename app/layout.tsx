@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import Script from 'next/script';
@@ -55,13 +54,17 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar />
-          <Search />
-          <AnimatePresence mode="wait">
-            <main className="min-h-[calc(100vh-160px)] px-4 md:px-10 py-10">{children}</main>
-          </AnimatePresence>
-          <Footer />
-          <ChatWidget />
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <Search />
+            <main className="flex-grow pt-20 pb-10">
+              <div className="container mx-auto px-4 md:px-6">
+                {children}
+              </div>
+            </main>
+            <Footer />
+            <ChatWidget />
+          </div>
           <Toaster />
         </ThemeProvider>
         <Analytics />

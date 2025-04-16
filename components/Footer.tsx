@@ -3,6 +3,7 @@
 import { Network, Mail, Phone, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ModeToggle from './ModeToggle';
+import NewsletterForm from './NewsLetterForm';
 
 const footerVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -78,18 +79,11 @@ export default function Footer() {
           </motion.div>
 
           <motion.div variants={itemVariants} className="space-y-4">
+          <div className="space-y-4">
             <h3 className="text-xl font-semibold">Newsletter</h3>
             <p className="text-blue-100">Subscribe to our newsletter for updates</p>
-            <div className="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="px-4 py-2 rounded-l-lg w-full text-gray-900 focus:outline-none"
-              />
-              <button className="bg-blue-600 px-4 py-2 rounded-r-lg hover:bg-blue-700 transition">
-                Subscribe
-              </button>
-            </div>
+            <NewsletterForm />
+          </div>
             <ModeToggle />
           </motion.div>
         </div>

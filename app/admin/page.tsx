@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Lock, FileText, Users, Settings } from 'lucide-react';
+import { FileText, Users, Settings } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
 
 export default function AdminDashboard() {

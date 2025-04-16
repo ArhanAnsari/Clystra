@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion';
 import { MapPin, Globe2, Network, Signal } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
-import Image from 'next/image';
+import EnhancedMap from '@/components/EnhancedMap';
+import NewsletterForm from '@/components/NewsLetterForm';
 
 export default function Coverage() {
   const locations = [
@@ -32,6 +33,16 @@ export default function Coverage() {
       description: 'International network partnerships for worldwide coverage'
     }
   ];
+  const coverageAreas = [
+    {
+      city: 'Nagpur',
+      coordinates: [21.1458, 79.0882] as [number, number],
+      coverage: '95%',
+      services: ['Fiber', '5G', 'Enterprise'],
+      radius: 5000 // 5km radius
+    },
+    // Add more cities
+  ];
 
   return (
     <PageTransition>
@@ -45,38 +56,22 @@ export default function Coverage() {
               transition={{ duration: 0.8 }}
               className="max-w-3xl mx-auto text-center"
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Coverage</h1>
+              {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Coverage</h1>
               <p className="text-xl text-blue-100">
                 Extensive network coverage across India with global connectivity solutions
+              </p> */}
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Network Coverage</h1>
+              <p className="text-xl text-blue-100">
+                Check our service availability in your area
               </p>
             </motion.div>
           </div>
         </section>
 
         {/* Coverage Map */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl font-bold mb-4">Network Presence</h2>
-              <p className="text-gray-600">
-                Strategic locations across India to serve you better
-              </p>
-            </motion.div>
-
-            <div className="relative h-[500px] mb-12">
-              <Image
-                src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1200"
-                alt="Coverage Map"
-                fill
-                className="object-cover rounded-lg shadow-xl"
-              />
-            </div>
+        <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+          <div className="h-[600px]">
+            <EnhancedMap coverageAreas={coverageAreas} />
           </div>
         </section>
 
@@ -193,6 +188,60 @@ export default function Coverage() {
                 <div className="text-blue-100">Support</div>
               </motion.div>
             </div>
+          </div>
+        </section>
+        {/* Coverage Areas List */}
+        <section className="py-20 bg-gray-50 dark:bg-gray-900">
+          <div className="container mx-auto px-6">
+            <h2 className="text-3xl font-bold text-center mb-12">Coverage Areas</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {coverageAreas.map((area) => (
+                <motion.div
+                  key={area.city}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg"
+                >
+                  <div className="flex items-start mb-4">
+                    <MapPin className="h-6 w-6 text-blue-600 mr-2" />
+                    <div>
+                      <h3 className="text-xl font-semibold">{area.city}</h3>
+                      <p className="text-blue-600">Coverage: {area.coverage}</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="font-semibold">Available Services:</p>
+                    <ul className="space-y-1">
+                      {area.services.map((service) => (
+                        <li key={service} className="flex items-center text-gray-600 dark:text-gray-300">
+                          <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2" />
+                          {service}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Newsletter Section */}
+        <section className="py-20">
+          <div className="container mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-2xl mx-auto text-center"
+            >
+              <h2 className="text-3xl font-bold mb-4">Stay Connected</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-8">
+                Subscribe to our newsletter for updates on new coverage areas
+              </p>
+              <NewsletterForm />
+            </motion.div>
           </div>
         </section>
       </main>

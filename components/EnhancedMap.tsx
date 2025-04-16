@@ -1,17 +1,33 @@
 'use client';
 
-import { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 
-// Fix for default marker icons
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: '/marker-icon-2x.png',
-  iconUrl: '/marker-icon.png',
-  shadowUrl: '/marker-shadow.png',
-});
+// Import Leaflet CSS in a way that works with SSR
+import 'leaflet/dist/leaflet.css';
+
+// Dynamically import Leaflet and its components
+const L = dynamic(() => import('leaflet'), { ssr: false });
+const MapContainer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  { ssr: false }
+);
+const TileLayer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  { ssr: false }
+);
+const Marker = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Marker),
+  { ssr: false }
+);
+const Popup = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Popup),
+  { ssr: false }
+);
+const Circle = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Circle),
+  { ssr: false }
+);
 
 interface CoverageArea {
   city: string;
@@ -27,6 +43,25 @@ interface EnhancedMapProps {
 
 export default function EnhancedMap({ coverageAreas }: Readonly<EnhancedMapProps>) {
   const [selectedArea, setSelectedArea] = useState<CoverageArea | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    // Fix for default marker icons
+    if (typeof window !== 'undefined') {
+      const L = require('leaflet');
+      delete (L.Icon.Default.prototype as any)._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: '/marker-icon-2x.png',
+        iconUrl: '/marker-icon.png',
+        shadowUrl: '/marker-shadow.png',
+      });
+    }
+  }, []);
+
+  if (!isClient) {
+    return <div className="h-[600px] bg-gray-100 dark:bg-gray-800 animate-pulse" />;
+  }
 
   return (
     <MapContainer
