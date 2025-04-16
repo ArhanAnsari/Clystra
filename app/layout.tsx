@@ -52,15 +52,11 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-grow pt-20 pb-10">
-              <div className="container mx-auto px-4 md:px-6">
-                {children}
-              </div>
-            </main>
-            <Footer />
-          </div>
+          <Navbar />
+          <main className="min-h-screen pt-16">
+            {children}
+          </main>
+          <Footer />
           <Toaster />
         </ThemeProvider>
         <Analytics />
