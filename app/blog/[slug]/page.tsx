@@ -21,7 +21,7 @@ const blogPosts = [
   // ... more posts
 ];
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
+export default function BlogPost({ params }: Readonly<{ params: { slug: string } }>) {
   const post = blogPosts.find(p => p.slug === params.slug);
   
   if (!post) notFound();

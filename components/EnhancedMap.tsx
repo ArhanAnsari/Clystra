@@ -25,7 +25,7 @@ interface EnhancedMapProps {
   coverageAreas: CoverageArea[];
 }
 
-export default function EnhancedMap({ coverageAreas }: EnhancedMapProps) {
+export default function EnhancedMap({ coverageAreas }: Readonly<EnhancedMapProps>) {
   const [selectedArea, setSelectedArea] = useState<CoverageArea | null>(null);
 
   return (
