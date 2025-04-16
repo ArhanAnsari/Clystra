@@ -26,10 +26,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -41,6 +38,7 @@ export default function Navbar() {
   return (
     <>
       <div className="h-16" />
+
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -53,19 +51,16 @@ export default function Navbar() {
       >
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link 
-              href="/" 
-              className="flex items-center space-x-3"
-              aria-label="Clystra Networks Home"
-            >
+
+            {/* Logo + Company Name */}
+            <Link href="/" className="flex items-center space-x-2">
               <Network className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
               <span className="text-lg sm:text-xl font-bold text-primary whitespace-nowrap">
                 Clystra Networks
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Nav Links */}
             <div className="hidden md:flex items-center space-x-6">
               {navLinks.map((link) => (
                 <Link
@@ -76,44 +71,37 @@ export default function Navbar() {
                       ? 'text-primary'
                       : 'text-foreground hover:text-primary'
                   }`}
-                  aria-current={pathname === link.href ? 'page' : undefined}
                 >
                   {link.label}
                 </Link>
               ))}
             </div>
 
-            {/* Right Side Actions */}
+            {/* Actions & Hamburger */}
             <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
                 className="text-muted-foreground hover:text-primary"
-                aria-label="Search"
               >
                 <Search className="h-5 w-5" />
               </Button>
-
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsChatOpen(!isChatOpen)}
                 className="text-muted-foreground hover:text-primary"
-                aria-label="Chat Support"
               >
                 <MessageCircle className="h-5 w-5" />
               </Button>
-
               <ModeToggle />
-
+              {/* Hamburger button only visible on mobile */}
               <Button
                 variant="ghost"
                 size="sm"
                 className="md:hidden text-muted-foreground hover:text-primary"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={isMobileMenuOpen}
               >
                 {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
@@ -121,7 +109,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Dropdown */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
@@ -142,7 +130,6 @@ export default function Navbar() {
                           ? 'bg-primary/10 text-primary'
                           : 'text-foreground hover:bg-accent hover:text-primary'
                       }`}
-                      aria-current={pathname === link.href ? 'page' : undefined}
                     >
                       {link.label}
                     </Link>
@@ -162,7 +149,6 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-background/80 backdrop-blur-sm z-30"
-            aria-hidden="true"
             onClick={() => {
               setIsSearchOpen(false);
               setIsChatOpen(false);
@@ -171,7 +157,7 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Search Panel */}
+      {/* Search Input */}
       <AnimatePresence>
         {isSearchOpen && (
           <motion.div
@@ -179,7 +165,6 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             className="fixed top-16 left-0 right-0 z-40 bg-background border-b border-border shadow-lg"
-            role="search"
           >
             <div className="container mx-auto px-4 py-4">
               <div className="relative max-w-2xl mx-auto">
@@ -188,7 +173,6 @@ export default function Navbar() {
                     type="text"
                     placeholder="Search..."
                     className="w-full px-4 py-2 pl-10 pr-10 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-primary"
-                    aria-label="Search input"
                   />
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Button
@@ -196,7 +180,6 @@ export default function Navbar() {
                     size="sm"
                     onClick={() => setIsSearchOpen(false)}
                     className="absolute right-1 top-1/2 -translate-y-1/2"
-                    aria-label="Close search"
                   >
                     <X className="h-4 w-4" />
                   </Button>
@@ -207,16 +190,15 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Chat Panel */}
+      {/* Chat Box */}
       <AnimatePresence>
         {isChatOpen && (
-          <motion.div
+          <motion.dialog
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
+            open
             className="fixed top-16 right-4 w-80 z-40 bg-background border border-border rounded-lg shadow-lg"
-            role="dialog"
-            aria-label="Chat support"
           >
             <div className="p-4 border-b border-border flex items-center justify-between">
               <h3 className="font-semibold">Chat Support</h3>
@@ -225,13 +207,12 @@ export default function Navbar() {
                 size="sm"
                 onClick={() => setIsChatOpen(false)}
                 className="h-8 w-8 p-0"
-                aria-label="Close chat"
               >
                 <X className="h-4 w-4" />
               </Button>
             </div>
             <div className="p-4 h-[400px] overflow-y-auto">
-              {/* Chat messages will go here */}
+              {/* Chat messages go here */}
             </div>
             <div className="p-4 border-t border-border">
               <div className="flex gap-2">
@@ -239,14 +220,13 @@ export default function Navbar() {
                   type="text"
                   placeholder="Type your message..."
                   className="flex-1 px-3 py-2 text-sm rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-primary"
-                  aria-label="Chat message input"
                 />
                 <Button size="sm" variant="default">
                   Send
                 </Button>
               </div>
             </div>
-          </motion.div>
+          </motion.dialog>
         )}
       </AnimatePresence>
     </>
