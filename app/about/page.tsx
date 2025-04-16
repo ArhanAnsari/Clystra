@@ -68,23 +68,6 @@ export default function About() {
                   Nagpur, from where we manage our growing network of operations across Maharashtra.
                 </p>
               </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="relative h-[400px]"
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800"
-                  alt="Clystra Networks Office"
-                  fill
-                  className="object-cover rounded-lg shadow-xl"
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j..." // Add base64 blur image
-                  loading="lazy"
-                />
-              </motion.div>
             </div>
           </div>
         </section>
