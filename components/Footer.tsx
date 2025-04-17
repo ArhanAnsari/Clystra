@@ -1,102 +1,196 @@
 'use client';
 
-import { Network, Mail, Phone, MapPin } from 'lucide-react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { FiHash } from 'react-icons/fi';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 import NewsletterForm from './NewsLetterForm';
 
-const footerVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      when: "beforeChildren",
-      staggerChildren: 0.2
-    }
-  }
+const footerLinks = {
+  company: [
+    { name: 'About Us', href: '/about' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'Press', href: '/press' },
+    { name: 'Blog', href: '/blog' },
+  ],
+  services: [
+    { name: 'Fiber Broadband', href: '/services/fiber' },
+    { name: 'Leased Lines', href: '/services/leased-lines' },
+    { name: 'Enterprise WiFi', href: '/services/enterprise-wifi' },
+    { name: 'Network Support', href: '/services/network-support' },
+  ],
+  support: [
+    { name: 'Contact Us', href: '/contact' },
+    { name: 'Help Center', href: '/help' },
+    { name: 'Service Status', href: '/status' },
+    { name: 'FAQs', href: '/faqs' },
+  ],
+  legal: [
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Terms of Service', href: '/terms' },
+    { name: 'Acceptable Use Policy', href: '/aup' },
+    { name: 'Cookie Policy', href: '/cookies' },
+  ],
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 }
-  }
-};
+const socialLinks = [
+  { name: 'Facebook', icon: Facebook, href: '#' },
+  { name: 'Twitter', icon: Twitter, href: '#' },
+  { name: 'Instagram', icon: Instagram, href: '#' },
+  { name: 'LinkedIn', icon: Linkedin, href: '#' },
+];
+
+const contactInfo = [
+  { icon: FiHash, text: 'CIN: U61101MH2025PTC443366' },
+  { icon: Mail, text: 'clystranetworks@gmail.com | info@clystranetworks.com' },
+  { icon: Phone, text: '+91 7720033786' },
+  { icon: MapPin, text: 'Flat No. 105, Saraswati Apartment 3, Wanjari Nagar, Medical College, Nagpur' },
+];
 
 export default function Footer() {
   return (
-    <motion.footer
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={footerVariants}
-      className="bg-gradient-to-r from-blue-900 to-blue-800 text-white"
-    >
-      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
-          <motion.div variants={itemVariants} className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <Network className="h-6 w-6 sm:h-8 sm:w-8" />
-              <span className="text-xl sm:text-2xl font-bold">Clystra Networks</span>
-            </div>
-            <p className="text-sm sm:text-base text-blue-100">
-              CIN: U61101MH2025PTC443366<br />
-              Empowering digital growth across Maharashtra
+    <footer className="bg-background border-t">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div className="space-y-4">
+            <Link href="/" className="flex items-center space-x-2">
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                Clystra
+              </span>
+            </Link>
+            <p className="text-sm text-muted-foreground">
+              Empowering businesses with high-speed, reliable internet connectivity and network solutions.
             </p>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-lg sm:text-xl font-semibold">Quick Links</h3>
-            <ul className="space-y-2 text-sm sm:text-base">
-              <li><a href="/about" className="hover:text-blue-300 transition inline-block">About Us</a></li>
-              <li><a href="/services" className="hover:text-blue-300 transition inline-block">Services</a></li>
-              <li><a href="/departments" className="hover:text-blue-300 transition inline-block">Departments</a></li>
-              <li><a href="/coverage" className="hover:text-blue-300 transition inline-block">Coverage</a></li>
-              <li><a href="/contact" className="hover:text-blue-300 transition inline-block">Contact</a></li>
-            </ul>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-lg sm:text-xl font-semibold">Contact Info</h3>
-            <div className="space-y-3 text-sm sm:text-base">
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-blue-300 flex-shrink-0 mt-1" />
-                <span>Flat No. 105, Saraswati Apartment 3,<br />Wanjari Nagar, Medical College,<br />Nagpur</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-blue-300 flex-shrink-0" />
-                <a href="tel:+917720033786" className="hover:text-blue-300 transition">+91 7720033786</a>
-              </div>
-              <div className="flex items-start space-x-3">
-                <Mail className="h-5 w-5 text-blue-300 flex-shrink-0 mt-1" />
-                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
-                  <a href="mailto:clystranetworks@gmail.com" className="hover:text-blue-300 transition">clystranetworks@gmail.com</a>
-                  <span className="hidden sm:inline">|</span>
-                  <a href="mailto:info@clystranetworks.com" className="hover:text-blue-300 transition">info@clystranetworks.com</a>
-                </div>
-              </div>
+            <div className="flex space-x-4">
+              {socialLinks.map((social) => (
+                <Link
+                  key={social.name}
+                  href={social.href}
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label={social.name}
+                >
+                  <social.icon className="h-5 w-5" />
+                </Link>
+              ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-lg sm:text-xl font-semibold">Newsletter</h3>
-            <p className="text-sm sm:text-base text-blue-100">Subscribe to our newsletter for updates</p>
-            <NewsletterForm />
-          </motion.div>
+          {/* Quick Links */}
+          <div className="grid grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-sm font-semibold mb-4">Company</h3>
+              <ul className="space-y-2">
+                {footerLinks.company.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold mb-4">Services</h3>
+              <ul className="space-y-2">
+                {footerLinks.services.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Support & Legal */}
+          <div className="grid grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-sm font-semibold mb-4">Support</h3>
+              <ul className="space-y-2">
+                {footerLinks.support.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold mb-4">Legal</h3>
+              <ul className="space-y-2">
+                {footerLinks.legal.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Newsletter & Contact */}
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-sm font-semibold mb-4">Stay Updated</h3>
+                <NewsletterForm />
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold mb-4">Contact Us</h3>
+              <ul className="space-y-2">
+                {contactInfo.map((info, index) => (
+                  <li key={index} className="flex items-start space-x-2">
+                    <info.icon className="h-4 w-4 mt-1 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">
+                      {info.text}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
-        <motion.div
-          variants={itemVariants}
-          className="border-t border-blue-700 mt-8 pt-6 text-center text-sm sm:text-base"
-        >
-          <p className="text-blue-100">
-            © {new Date().getFullYear()} Clystra Networks Pvt Ltd. All rights reserved.
+        <Separator className="my-8" />
+
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Clystra Networks Pvt. Ltd. All rights reserved.
           </p>
-        </motion.div>
+          <div className="flex space-x-4">
+            <Link
+              href="/privacy"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              Terms of Service
+            </Link>
+          </div>
+        </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }

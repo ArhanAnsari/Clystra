@@ -1,65 +1,130 @@
 // components/Search.tsx
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
 import { Search as SearchIcon, X } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Search() {
+interface SearchResult {
+  id: number;
+  title: string;
+  excerpt: string;
+  category: string;
+}
+
+interface SearchProps {
+  placeholder?: string;
+  onSearch?: (query: string) => void;
+  results?: SearchResult[];
+  isLoading?: boolean;
+  className?: string;
+}
+
+export default function Search({
+  placeholder = 'Search...',
+  onSearch,
+  results = [],
+  isLoading = false,
+  className = ''
+}: Readonly<SearchProps>) {
+  const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const searchRef = useRef<HTMLDivElement>(null);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Implement search logic here
-    console.log('Searching for:', searchQuery);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleSearch = (value: string) => {
+    setQuery(value);
+    setIsOpen(true);
+    if (onSearch) {
+      onSearch(value);
+    }
+  };
+
+  const handleClear = () => {
+    setQuery('');
+    setIsOpen(false);
+    if (onSearch) {
+      onSearch('');
+    }
   };
 
   return (
-    <div className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
-        aria-label="Search"
-      >
-        <SearchIcon className="h-5 w-5" />
-      </button>
+    <div ref={searchRef} className={`relative ${className}`}>
+      <div className="relative">
+        <SearchIcon className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+        <Input
+          type="text"
+          placeholder={placeholder}
+          value={query}
+          onChange={(e) => handleSearch(e.target.value)}
+          onFocus={() => setIsOpen(true)}
+          className="pl-8 pr-8"
+          aria-label="Search"
+        />
+        {query && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6"
+            onClick={handleClear}
+            aria-label="Clear search"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        )}
+      </div>
 
       <AnimatePresence>
-        {isOpen && (
+        {isOpen && (query || results.length > 0) && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute right-0 mt-2 w-screen max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4"
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 w-full mt-2 bg-background rounded-lg shadow-lg border"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Search</h2>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <form onSubmit={handleSearch}>
-              <div className="relative">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search..."
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
-                >
-                  <SearchIcon className="h-4 w-4" />
-                </button>
-              </div>
-            </form>
+            <ScrollArea className="max-h-60">
+              {isLoading ? (
+                <div className="p-4 text-center text-muted-foreground">
+                  Searching...
+                </div>
+              ) : results.length > 0 ? (
+                <div className="divide-y">
+                  {results.map((result) => (
+                    <a
+                      key={result.id}
+                      href={`/blog/${result.id}`}
+                      className="block p-4 hover:bg-muted transition-colors"
+                    >
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-medium">{result.category}</span>
+                      </div>
+                      <h3 className="font-medium">{result.title}</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {result.excerpt}
+                      </p>
+                    </a>
+                  ))}
+                </div>
+              ) : query ? (
+                <div className="p-4 text-center text-muted-foreground">
+                  No results found
+                </div>
+              ) : null}
+            </ScrollArea>
           </motion.div>
         )}
       </AnimatePresence>
