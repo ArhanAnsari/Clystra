@@ -34,10 +34,10 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { name: 'Facebook', icon: Facebook, href: '#' },
-  { name: 'Twitter', icon: Twitter, href: '#' },
-  { name: 'Instagram', icon: Instagram, href: '#' },
-  { name: 'LinkedIn', icon: Linkedin, href: '#' },
+  { name: 'Facebook', icon: Facebook, href: 'https://www.facebook.com/clystranetworks' },
+  { name: 'X(Twitter)', icon: Twitter, href: 'https://x.com/clystranetworks' },
+  { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/clystranetworks' },
+  { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/clystranetworks' },
 ];
 
 const contactInfo = [

@@ -7,22 +7,22 @@ import { MessageCircle, X, Send } from 'lucide-react';
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState<{ text: string; sender: 'user' | 'support' }[]>([
-    { text: 'Hello! How can we help you today?', sender: 'support' },
+  const [messages, setMessages] = useState<{ id: string; text: string; sender: 'user' | 'support' }[]>([
+    { id: '1', text: 'Hello! How can we help you today?', sender: 'support' },
   ]);
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
 
-    setMessages([...messages, { text: message, sender: 'user' }]);
+    setMessages([...messages, { id: Date.now().toString(), text: message, sender: 'user' }]);
     setMessage('');
 
     // Simulate support response
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
-        { text: 'Thanks for your message! Our team will get back to you soon.', sender: 'support' },
+        { id: (Date.now() + 1).toString(), text: 'Thanks for your message! Our team will get back to you soon.', sender: 'support' },
       ]);
     }, 1000);
   };
@@ -56,9 +56,9 @@ export default function ChatWidget() {
             </div>
 
             <div className="h-96 overflow-y-auto p-4 space-y-4">
-              {messages.map((msg, index) => (
+              {messages.map((msg) => (
                 <div
-                  key={index}
+                  key={msg.id}
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div

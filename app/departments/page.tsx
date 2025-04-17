@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { Users } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
-// import Image from 'next/image';
 
 export default function Departments() {
   const departments = [

@@ -28,6 +28,7 @@ export default function NewsletterForm() {
       }
     } catch (error) {
       setStatus('error');
+      console.error('Newsletter subscription error:', error);
     }
   };
 

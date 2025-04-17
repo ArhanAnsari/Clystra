@@ -10,7 +10,12 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GA_TRACKING_ID } from '@/lib/analytics';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial']
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://clystranetworks.com'),
@@ -53,7 +58,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
-          <main className="min-h-screen pt-16">
+          <main className="min-h-screen">
             {children}
           </main>
           <Footer />
