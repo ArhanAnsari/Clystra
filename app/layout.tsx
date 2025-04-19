@@ -23,21 +23,36 @@ export const metadata: Metadata = {
     default: 'Clystra Networks - Advanced Internet Infrastructure Solutions',
     template: '%s | Clystra Networks'
   },
-  description: 'Leading internet infrastructure provider in Maharashtra...',
+  description: 'Leading internet infrastructure provider in Maharashtra, offering high-speed fiber broadband, leased lines, and enterprise network solutions.',
   keywords: ['internet infrastructure', 'network solutions', 'ISP', 'Maharashtra'],
   openGraph: {
     type: 'website',
     locale: 'en_IN',
     url: 'https://clystranetworks.com',
     title: 'Clystra Networks',
-    description: 'Advanced Internet Infrastructure Solutions',
-    siteName: 'Clystra Networks'
+    description: 'Clystra Networks - Advanced Internet Infrastructure Solutions',
+    siteName: 'Clystra Networks',
+    images: [
+      {
+        url: '/logo.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Clystra Networks Logo'
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Clystra Networks',
-    description: 'Advanced Internet Infrastructure Solutions',
-  }
+    description: 'Clystra Networks - Advanced Internet Infrastructure Solutions',
+    images: ['/logo.jpg']
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+    shortcut: '/favicon.ico'
+  },
+  manifest: '/site.webmanifest'
 };
 
 export default function RootLayout({
