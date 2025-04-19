@@ -158,8 +158,8 @@ export default function Footer() {
             <div>
               <h3 className="text-sm font-semibold mb-4">Contact Us</h3>
               <ul className="space-y-2">
-                {contactInfo.map((info, index) => (
-                  <li key={index} className="flex items-start space-x-2">
+                {contactInfo.map((info) => (
+                  <li key={info.text} className="flex items-start space-x-2">
                     <info.icon className="h-4 w-4 mt-1 text-muted-foreground" />
                     <span className="text-sm text-muted-foreground">
                       {info.text}
@@ -177,7 +177,6 @@ export default function Footer() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Clystra Networks Pvt. Ltd. All rights reserved.
           </p>
-          {/* Adding my name as Maintained by Arhan Ansari with my portfolio link */}
           <p className="text-sm text-muted-foreground">
             Maintained by <Link href="https://arhanansari.is-a.dev/" className="text-primary hover:text-primary/80 transition-colors">Arhan Ansari</Link>
           </p>
