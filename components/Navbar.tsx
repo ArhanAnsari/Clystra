@@ -57,7 +57,7 @@ export default function Navbar() {
             height={150}
           />
           <span className="font-medium text-xl gradient-text">
-            Clystra Networks
+            CLYSTRA NETWORKS PVT. LTD.
           </span>
         </Link>
 

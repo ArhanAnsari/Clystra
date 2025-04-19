@@ -61,7 +61,7 @@ export default function Footer() {
                 height={150}
               />
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                Clystra Networks
+                CLYSTRA NETWORKS PVT. LTD.
               </span>
             </Link>
             <p className="text-sm text-muted-foreground">
