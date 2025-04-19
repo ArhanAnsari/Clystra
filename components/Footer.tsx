@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import NewsletterForm from './NewsLetterForm';
@@ -53,8 +54,14 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center space-x-2">
+              <Image
+                src="/logo.jpg"
+                alt="Clystra Networks Logo"
+                width={150}
+                height={150}
+              />
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                Clystra
+                Clystra Networks
               </span>
             </Link>
             <p className="text-sm text-muted-foreground">

@@ -1,6 +1,6 @@
 "use client";
 
-// import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
@@ -50,13 +50,12 @@ export default function Navbar() {
       <nav className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          {/* <Image
-            src="/logo.png"
-            alt="Hedge AI Logo"
-            width={32}
-            height={32}
-            className="rounded-full"
-          /> */}
+          <Image
+            src="/logo.jpg"
+            alt="Clystra Networks Logo"
+            width={150}
+            height={150}
+          />
           <span className="font-medium text-xl gradient-text">
             Clystra Networks
           </span>
