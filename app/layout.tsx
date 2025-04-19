@@ -56,7 +56,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} bg-background text-foreground`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Navbar />
           <main className="min-h-screen">
             {children}
