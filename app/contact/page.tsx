@@ -77,8 +77,7 @@ export default function ContactPage() {
       icon: Mail,
       title: 'Email Us',
       details: [
-        'info@clystranetworks.com',
-        'support@clystranetworks.com'
+        'info@clystranetworks.com'
       ],
       action: 'mailto:info@clystranetworks.com'
     },
@@ -163,13 +162,16 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{info.title}</h3>
                 <div className="space-y-1 mb-4">
-                  {info.details.map((detail, i) => (
-                    <p key={i} className="text-muted-foreground">{detail}</p>
+                  {info.details.map((detail) => (
+                    <p key={`${info.title}-${detail}`} className="text-muted-foreground">{detail}</p>
                   ))}
                 </div>
                 <div className="text-sm text-[#0066FF] dark:text-[#2B9CFF] mt-auto font-medium">
-                  {info.icon === Mail ? 'Send an email' : 
-                    info.icon === Phone ? 'Call now' : 'View on map'}
+                  {(() => {
+                    if (info.icon === Mail) return 'Send an email';
+                    if (info.icon === Phone) return 'Call now';
+                    return 'View on map';
+                  })()}
                   <ArrowRight className="inline-block ml-1 h-3 w-3" />
                 </div>
               </motion.a>
@@ -291,29 +293,40 @@ export default function ContactPage() {
                 </div>
                 
                 <div className="text-center">
-                  <Button
-                    type="submit"
-                    disabled={formSubmitting || formSubmitted}
-                    className={`px-8 transition-all duration-300 ${
-                      formSubmitted 
-                        ? 'bg-green-600 hover:bg-green-700' 
-                        : 'bg-gradient-to-r from-[#2B9CFF] to-[#0066FF] hover:from-[#0066FF] hover:to-[#0055DD]'
-                    } text-white`}
-                  >
-                    {formSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <LoadingSpinner />
-                        <span>Sending...</span>
-                      </span>
-                    ) : formSubmitted ? (
-                      <span className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4" />
-                        <span>Message Sent!</span>
-                      </span>
-                    ) : (
-                      'Send Message'
-                    )}
-                  </Button>
+                  {(() => {
+                    let buttonContent;
+                    if (formSubmitting) {
+                      buttonContent = (
+                        <span className="flex items-center gap-2">
+                          <LoadingSpinner />
+                          <span>Sending...</span>
+                        </span>
+                      );
+                    } else if (formSubmitted) {
+                      buttonContent = (
+                        <span className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4" />
+                          <span>Message Sent!</span>
+                        </span>
+                      );
+                    } else {
+                      buttonContent = 'Send Message';
+                    }
+                    
+                    return (
+                      <Button
+                        type="submit"
+                        disabled={formSubmitting || formSubmitted}
+                        className={`px-8 transition-all duration-300 ${
+                          formSubmitted 
+                            ? 'bg-green-600 hover:bg-green-700' 
+                            : 'bg-gradient-to-r from-[#2B9CFF] to-[#0066FF] hover:from-[#0066FF] hover:to-[#0055DD]'
+                        } text-white`}
+                      >
+                        {buttonContent}
+                      </Button>
+                    );
+                  })()}
                 </div>
               </form>
             </motion.div>

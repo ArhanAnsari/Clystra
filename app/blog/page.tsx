@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, User, Tag, Search, ArrowRight } from 'lucide-react';
+import { Calendar, User, Search, ArrowRight } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
 import Link from 'next/link';
 import Image from 'next/image';
