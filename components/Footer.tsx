@@ -41,8 +41,7 @@ const socialLinks = [
 ];
 
 const contactInfo = [
-  { icon: FiHash, text: 'CIN: U61101MH2025PTC443366' },
-  { icon: Mail, text: 'clystranetworks@gmail.com | info@clystranetworks.com' },
+  { icon: Mail, text: 'info@clystranetworks.com' },
   { icon: Phone, text: '+91 7720033786' },
   { icon: MapPin, text: 'Flat No. 105, Saraswati Apartment 3, Wanjari Nagar, Medical College, Nagpur' },
 ];
@@ -171,6 +170,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Clystra Networks Pvt. Ltd. All rights reserved.
+          </p>
+          {/* Adding my name as Maintained by Arhan Ansari with my portfolio link */}
+          <p className="text-sm text-muted-foreground">
+            Maintained by <Link href="https://arhanansari.is-a.dev/" className="text-primary hover:text-primary/80 transition-colors">Arhan Ansari</Link>
           </p>
           <div className="flex space-x-4">
             <Link
