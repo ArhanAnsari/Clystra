@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
-import { FiHash } from 'react-icons/fi';
 import { Separator } from '@/components/ui/separator';
 import NewsletterForm from './NewsLetterForm';
 
