@@ -55,7 +55,7 @@ export default function Footer() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src="/logo.jpg"
+                src="/logo-final.jpg"
                 alt="Clystra Networks Logo"
                 width={150}
                 height={150}

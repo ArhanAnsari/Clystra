@@ -13,37 +13,18 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const links = [
-      { hash: '/', name: 'Home' },
-      { hash: '/about', name: 'About' },
-      { hash: '/services', name: 'Services' },
-      { hash: '/departments', name: 'Departments' },
-      { hash: '/coverage', name: 'Coverage' },
-      { hash: '/blog', name: 'Blog' },
-      { hash: '/contact', name: 'Contact' },
+      { href: '/', name: 'Home' },
+      { href: '/about', name: 'About' },
+      { href: '/services', name: 'Services' },
+      { href: '/departments', name: 'Departments' },
+      { href: '/coverage', name: 'Coverage' },
+      { href: '/blog', name: 'Blog' },
+      { href: '/contact', name: 'Contact' },
   ];
 
-  const isLinkActive = (hash: string) => {
-    if (hash === pathname) return true;
-    return false;
+  const isLinkActive = (href: string) => {
+    return pathname === href;
   };
-
-  const handleScroll = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    hash: string
-  ) => {
-    e.preventDefault();
-  
-    if (typeof window !== "undefined" && typeof document !== "undefined") {
-      const target = document.querySelector(hash);
-      if (target) {
-        window.scrollTo({
-          top: target.getBoundingClientRect().top + window.scrollY - 30,
-          behavior: "smooth",
-        });
-      }
-    }
-  };
-  
 
   return (    
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -51,7 +32,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/logo.jpg"
+            src="/logo-final.jpg"
             alt="Clystra Networks Logo"
             width={150}
             height={150}
@@ -66,10 +47,9 @@ export default function Navbar() {
           {links.map((link) => (
             <Link
               key={link.name}
-              href={link.hash}
-              onClick={(e) => handleScroll(e, link.hash)}
+              href={link.href}
               className={`text-sm transition-colors hover:text-primary ${
-                isLinkActive(link.hash) ? "text-primary font-medium" : "text-muted-foreground"
+                isLinkActive(link.href) ? "text-primary font-medium" : "text-muted-foreground"
               }`}
             >
               {link.name}
@@ -104,13 +84,10 @@ export default function Navbar() {
               {links.map((link) => (
                 <Link
                   key={link.name}
-                  href={link.hash}
-                  onClick={(e) => {
-                    handleScroll(e, link.hash);
-                    setIsMobileMenuOpen(false);
-                  }}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className={`block py-2 text-sm transition-colors hover:text-primary ${
-                    isLinkActive(link.hash) ? "text-primary font-medium" : "text-muted-foreground"
+                    isLinkActive(link.href) ? "text-primary font-medium" : "text-muted-foreground"
                   }`}
                 >
                   {link.name}

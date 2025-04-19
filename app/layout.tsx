@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: 'Clystra Networks',
     images: [
       {
-        url: '/logo.jpg',
+        url: '/logo-final.jpg',
         width: 1200,
         height: 630,
         alt: 'Clystra Networks Logo'
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Clystra Networks',
     description: 'Clystra Networks - Advanced Internet Infrastructure Solutions',
-    images: ['/logo.jpg']
+    images: ['/logo-final.jpg']
   },
   icons: {
     icon: '/favicon.ico',
@@ -77,7 +77,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <Toaster />
+          <Toaster position="top-right" richColors closeButton />
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
